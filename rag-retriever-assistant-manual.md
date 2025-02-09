@@ -46,4 +46,3 @@ Typical interpretation:
 0.5 - 0.6: Good relevance
 0.3 - 0.5: Moderate relevance
 Below 0.3: Lower relevance
-

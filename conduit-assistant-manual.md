@@ -62,17 +62,58 @@ This command displays:
 - Relationship type
 - URL of the remote link
 
-Note: Remote links often provide valuable additional context about Jira tickets, including:
+IMPORTANT: IMMEDIATELY after retrieving any Jira ticket, you MUST ALWAYS fetch the ticket's remote links using 'conduit jira issue remote-links <issue_key>'
+
+MANDATORY: After the 'remote-links' command returns URLs, you MUST:
+
+1. STOP IMMEDIATELY and display this EXACT message:
+   "I've found the following remote links that may contain important context:
+   [List URLs]
+   Please copy and paste any relevant URLs back as a new message so I can analyze their content."
+2. Wait for the user to provide the content
+3. Analyze any provided content thoroughly
+4. DO NOT PROCEED until analysis is complete
+
+Note: Remote links may provide essential context that must be analyzed before proceeding, including:
 
 - Related technology information
 - Product architecture details
 - Product tech stack documentation
 - Other contextual resources
 
-Important: When remote links are returned:
+# URL Handling Instructions
 
-1. First examine the actual URLs returned by this command
-2. Review the contents of these URLs directly as they often contain pre-vetted contextual information
+# [OPERATORS: USE SECTION A FOR ASSISTANTS WITH AUTO-SCRAPING, SECTION B FOR OTHERS]
+
+# Section A: For Assistants With Automatic URL Scraping
+
+MANDATORY: After the 'remote-links' command returns URLs, you MUST:
+
+1. STOP IMMEDIATELY and access all remote link content
+2. Analyze the content thoroughly
+3. Present your findings to the user
+4. DO NOT PROCEED until analysis is complete
+
+# Section B: For Assistants Without Automatic URL Scraping
+
+MANDATORY: After the 'remote-links' command returns URLs, you MUST:
+
+1. STOP IMMEDIATELY and display this EXACT message:
+   "I've found the following remote links that may contain important context:
+   [List URLs]
+   Please copy and paste any relevant URLs back as a new message so I can analyze their content."
+2. Wait for the user to provide the content
+3. Analyze any provided content thoroughly
+4. DO NOT PROCEED until analysis is complete
+
+[OPERATORS: DELETE THE UNUSED SECTION WHEN CONFIGURING YOUR ASSISTANT]
+
+Note: Remote links may provide essential context that must be analyzed before proceeding, including:
+
+- Related technology information
+- Product architecture details
+- Product tech stack documentation
+- Other contextual resources
 
 # Response Format
 
