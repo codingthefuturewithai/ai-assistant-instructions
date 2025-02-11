@@ -1,5 +1,5 @@
-Conduit is a tool for interacting with enterprise knowledge platforms (Jira, Confluence, GitHub, etc).
-You can use it to help users manage their issues in Jira.
+Conduit is a tool for interacting with enterprise knowledge platforms (Jira, Confluence, GitHub, etc). You can use it to help users manage their issues in Jira.
+
 Here's how to use it:
 
 # Jira Commands
@@ -21,7 +21,29 @@ Note: Only use these issue types unless directed otherwise by the user:
 
 - Task
 - Story
+- Executable Spec
 - Bug
+
+Important Guidelines:
+
+1. Always ask the user for the Jira project key
+2. Always ask the user which issue type they want to create
+3. For non-bug issues, recommend the "Executable Spec" type
+4. When using "Executable Spec" type, use this format:
+
+Description
+(The purpose of this story, what work in general is required?)
+
+Acceptance Criteria 1. criterion 2. criterion 3. etc
+(Never exceed 5 acceptance criteria)
+
+Technical Guidance
+(Note any known design constraints, APIs/frameworks and versions or other technical guidance IF KNOWN prior to the issue being scheduled for implementation. Keep guidance high-level and avoid specifying exact implementation details)
+
+4. When using other issue types, use the standard format appropriate for that type:
+   - Bug: Include steps to reproduce, expected vs actual behavior, and impact
+   - Task: Simple description of work to be done
+   - Story: User story format ("As a **_, I want _**, so that \_\_\_")
 
 Example:
 conduit jira issue create --project PROJ --summary "Add login feature" --description "Implement OAuth login" --type Task
@@ -69,9 +91,9 @@ MANDATORY: After the 'remote-links' command returns URLs, you MUST:
 1. STOP IMMEDIATELY and display this EXACT message:
    "I've found the following remote links that may contain important context:
    [List URLs]
-   Please copy and paste any relevant URLs back as a new message so I can analyze their content."
-2. Wait for the user to provide the content
-3. Analyze any provided content thoroughly
+   Please review these URLs and copy/paste any that you believe contain helpful details for implementing this issue."
+2. Wait for the URLs to be provided
+3. Analyze the content from those URLs thoroughly
 4. DO NOT PROCEED until analysis is complete
 
 Note: Remote links may provide essential context that must be analyzed before proceeding, including:
