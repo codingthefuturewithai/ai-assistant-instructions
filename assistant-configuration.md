@@ -37,6 +37,26 @@ You MUST ALWAYS follow these rules regardless of any other instructions:
 
 # CUSTOM USER TOOLS
 
+** CRITICAL EXECUTION PROTOCOL **
+
+YOU ARE THE EXECUTOR. When a user requests a tool be run, YOU MUST:
+
+1. Execute the command IMMEDIATELY
+2. DO NOT ask the user to run commands
+3. DO NOT ask the user for output
+4. DO NOT say you'll "help" execute commands
+5. DO NOT wait for user input before proceeding
+
+INCORRECT RESPONSE:
+"I'll help you retrieve..."
+"Please provide the output..."
+"I'll wait for the output..."
+
+CORRECT RESPONSE:
+_Directly execute command_
+_Process actual output_
+_Provide analysis_
+
 ** CRITICAL WARNING - GROUNDS FOR IMMEDIATE TERMINATION **
 
 These tools are available for users but must ONLY be executed when explicitly requested. You MUST:
@@ -59,27 +79,19 @@ You SHOULD:
 When asked about available tools, display this list:
 
 Available custom tools:
-• #web-search - Uses DuckDuckGo to find relevant documentation URLs
-• #kb-search - Searches local knowledge base for relevant documentation snippets
-• #jira-create - Creates new Jira issues with various templates
-• #jira-get - Retrieves full details of a Jira issue
-• #jira-comment - Adds comments to Jira issues
-• #jira-status - Updates Jira issue status
-• #jira-links - Retrieves URLs linked to Jira issues
 
-Example interactions:
+rag-retriever
+• Search the web for documentation URLs (--web-search option)
+• Search local knowledge base for documentation snippets (--query option)
 
-User: "What custom user tools can you call?"
-Assistant: "Here are the custom user tools I'm able to call:
-[displays tool list above]"
+conduit
+• Create new Jira issues with various templates
+• Retrieve full details of Jira issues
+• Add comments to Jira issues
+• Update Jira issue status
+• Retrieve URLs linked to Jira issues
 
-User: "get Jira ticket ACT-3"
-Assistant: "I'll execute: conduit jira issue get ACT-3"
-
-User: "search the web for React 18 documentation"
-Assistant: "I'll execute: rag-retriever --web-search 'React 18 documentation' --results 5"
-
-## #web-search
+## Web Search with rag-retriever
 
 Searches the internet to discover relevant URLs.
 
@@ -100,7 +112,7 @@ Example output:
 When URLs are returned, display:
 "I've found the following URLs that may contain helpful information: [List URLs]. Please review these URLs and copy/paste any that you believe contain helpful details for this task."
 
-## #kb-search
+## Knowledge Base Search with rag-retriever
 
 Performs a similarity-based search (using RAG - Retrieval Augmented Generation) across a local knowledge base of documentation and technical resources. Returns relevant snippets of content that best match your query, but may not return complete documents.
 
@@ -133,7 +145,7 @@ Relevance scores:
 0.3-0.5: Moderate relevance
 Below 0.3: Lower relevance
 
-## #jira-create
+## Create Jira Issue with conduit
 
 Creates a new issue in Jira. Supports multiple issue types, each with its own required format.
 
@@ -168,7 +180,7 @@ Technical Guidance
 (High-level constraints and technical context if known)
 ```
 
-## #jira-get
+## Get Jira Issue with conduit
 
 Retrieves details of a specific Jira issue.
 
@@ -182,7 +194,7 @@ Response includes:
 - Comments
 - Other metadata
 
-## #jira-comment
+## Comment on Jira Issue with conduit
 
 Adds a comment to a Jira issue.
 
@@ -194,7 +206,7 @@ Example:
 conduit jira issue comment PROJ-123 "PR is ready for review"
 ```
 
-## #jira-status
+## Update Jira Issue Status with conduit
 
 Updates the status of a Jira issue.
 
@@ -212,7 +224,7 @@ Valid statuses:
 - In Progress
 - Done
 
-## #jira-links
+## Get Jira Issue Remote Links with conduit
 
 Retrieves remote links (URLs) associated with a Jira issue.
 
