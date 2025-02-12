@@ -90,6 +90,7 @@ conduit
 • Add comments to Jira issues
 • Update Jira issue status
 • Retrieve URLs linked to Jira issues
+• Retrieve Confluence pages by space or title
 
 ## Web Search with rag-retriever
 
@@ -238,3 +239,61 @@ Response includes:
 
 When links are returned, display:
 "I've found the following remote links that may contain important context: [List URLs]. Please review these URLs and copy/paste any that you believe contain helpful details for implementing this issue."
+
+## List Confluence Pages with conduit
+
+Lists all pages within a specified Confluence space.
+
+Syntax: `conduit confluence pages list <space_key> [--limit N]`
+
+Example:
+
+```
+conduit confluence pages list ACT --limit 10
+```
+
+Response includes:
+
+- Page titles
+- Page IDs
+- Last modified dates
+- Other page metadata
+
+## Get Confluence Space Content with conduit
+
+Retrieves all content from a specified Confluence space.
+
+Syntax: `conduit confluence pages content <space_key> --format <format>`
+
+Example:
+
+```
+conduit confluence pages content ACT --format clean
+```
+
+Response includes:
+
+- Content of all pages in the space
+- Page metadata and properties
+
+## Get Confluence Page Content by Space and Title with conduit
+
+Retrieves content from a specific Confluence page by title within a space.
+
+Syntax: `conduit confluence pages get <space_key> "<page_title>" --format <format>`
+
+Example:
+
+```
+conduit confluence pages get ACT "Conduit - MVP Scope" --format clean
+```
+
+Response includes:
+
+- Page content in the specified format (clean removes markup)
+- Page metadata and properties
+
+Available formats for content commands:
+
+- clean: Plain text without markup
+- storage: Raw storage format with markup
