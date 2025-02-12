@@ -2,6 +2,15 @@
 
 This repository contains instruction sets and documentation that can be loaded into AI assistants to enhance their capabilities with custom tools. These instructions have been tested successfully with multiple AI coding assistants including aider, Cursor Composer, and Windsurf Cascade using the Claude 3.5 Sonnet model.
 
+## Getting Started
+
+To configure your AI coding assistant with these instructions:
+
+1. Follow our [Setup Guide](instructions/setup/ai-assistant-setup-guide.md) which provides step-by-step instructions for:
+   - Installing prerequisites (RAG Retriever and Conduit tools)
+   - Configuring supported AI assistants (Aider, Cursor, and Windsurf)
+   - Verifying your setup is working correctly
+
 ## Directory Structure
 
 ```
