@@ -1,25 +1,62 @@
-# AI Assistant Instructions
+# AI Tool Custom Instructions
 
-This repository contains instruction sets and documentation that can be loaded into AI assistants to enhance their capabilities. These instructions cover a wide range of areas including but not limited to tool interactions, behavior protocols, quality controls, task-specific guidance, and operational procedures.
+This repository contains instruction sets and documentation that can be loaded into AI assistants to enhance their capabilities with custom tools. These instructions have been tested successfully with multiple AI coding assistants including aider, Cursor Composer, and Windsurf Cascade using the Claude 3.5 Sonnet model.
+
+## Directory Structure
+
+```
+.
+├── LICENSE.md
+├── README.md
+├── instructions/
+│   ├── universal/           # Universal instruction sets
+│   │   ├── README.md
+│   │   ├── combined-assistant-custom-instructions.md
+│   │   ├── command-execution-instructions.md
+│   │   ├── conduit-assistant-instructions.md
+│   │   ├── hallucination-prevention-instructions.md
+│   │   └── rag-retriever-assistant-instructions.md
+│   └── custom/             # Custom instruction sets
+├── tests/
+│   └── assistant-custom-tools-tests.md
+```
 
 ## Instruction Sets
 
-### Conduit Instructions
+### Universal Instructions
 
-Instructions for AI assistants on how to interact with enterprise platforms like Jira, Confluence, and GitHub through the Conduit tool.
+The [universal instructions](instructions/universal/README.md) directory contains core instruction sets that can be used across different AI assistants:
 
-### RAG Retriever Instructions
+- **Combined Assistant Instructions** - Complete set of instructions for tool usage and hallucination prevention
+- **Command Execution Instructions** - Guidelines for proper shell command execution in subdirectories
+- **Conduit Assistant Instructions** - Instructions for using the Conduit tool for platform integrations
+- **Hallucination Prevention Instructions** - Strict protocol to prevent AI from making assumptions or guessing
+- **RAG Retriever Assistant Instructions** - Guidelines for using the RAG Retriever tool for knowledge base and web searches
 
-Instructions for AI assistants on how to use the RAG Retriever command-line tool for retrieving relevant information from knowledge bases.
+### Custom Instructions
 
-### Zero Hallucination Protocol
+The custom instructions directory contains specialized instruction sets for specific use cases or environments.
 
-Instructions for enforcing strict accuracy and preventing AI hallucination when dealing with version-specific technical information.
+## Testing
 
-## Documentation
+The [tests](tests/assistant-custom-tools-tests.md) directory contains test cases and validation scenarios for the instruction sets.
 
-- [Conduit Assistant Manual](conduit-assistant-manual.md) - Instructions for Jira interaction patterns
-- [RAG Retriever Assistant Manual](rag-retriever-assistant-manual.md) - Instructions for knowledge retrieval patterns
+## Tools Integration
+
+These instructions enable AI assistants to work with the following tools:
+
+1. **RAG Retriever**
+
+   - Web search functionality
+   - Documentation search and retrieval
+   - Content relevance scoring
+   - Knowledge base management
+
+2. **Conduit**
+   - Jira integration
+   - Confluence integration
+   - Issue tracking workflows
+   - Standardized templates
 
 ## Contributing
 
@@ -27,4 +64,4 @@ This repository welcomes contributions of new instruction sets that can enhance 
 
 ## License
 
-MIT License
+[MIT License](LICENSE.md)

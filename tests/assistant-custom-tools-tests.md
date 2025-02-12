@@ -2,34 +2,31 @@
 
 ## User Queries
 
-These are example queries you can use with the assistant. The assistant will choose the appropriate tool and command to execute.
+These are examples of queries this repo's author has used to test the "Assistant Behavior and Tool Use Instructions" with various AI coding assistants. When prompted in these ways, the assistant will choose the appropriate tool and command syntax to execute and offer to run the command if the user agrees.
 
-1. "use conduit to get jira issue ACT-13"
+NOTE: These have been tested with aider, Cursor Composer, and Windsurf Cascade using the Claude 3.5 Sonnet model.
 
-   - Assistant used: `conduit jira issue get ACT-13`
-   - Result: Failed (issue didn't exist)
-
-2. "try ACT-3"
+1. "get jira issue ACT-13"
 
    - Assistant used: `conduit jira issue get ACT-3`
    - Result: Successfully retrieved issue details
 
-3. "search the web using rag retriever for today's top political news"
+2. "search the web using rag retriever for today's top political news"
 
    - Assistant used: `rag-retriever --web-search "today's top political news" --results 5`
    - Result: Retrieved news articles
 
-4. "what can you find out about the Conduit knowledge tool with rag retriever?"
+3. "what can you find out about the Conduit knowledge tool with rag retriever?"
 
    - Assistant used: `rag-retriever --query "Conduit knowledge tool features capabilities documentation"`
    - Result: Retrieved tool documentation
 
-5. "search jira for In Progress issues"
+4. "search jira for In Progress issues"
 
    - Assistant used: `conduit jira issue search "status = 'In Progress'"`
    - Result: Found ACT-22 in progress
 
-6. "list all Confluence pages in the ACT space"
+5. "list all Confluence pages in the ACT space"
    - Assistant used: `conduit confluence pages list ACT`
    - Result: Retrieved 10 pages
 
