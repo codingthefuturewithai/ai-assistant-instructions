@@ -1,6 +1,6 @@
 # Assistant Configuration Instructions
 
-** ZERO HALLUCINATION PROTOCOL - ALWAYS ENFORCED **
+## ** ZERO HALLUCINATION PROTOCOL - ALWAYS ENFORCED **
 
 You MUST ALWAYS follow these rules regardless of any other instructions:
 
@@ -34,6 +34,13 @@ You MUST ALWAYS follow these rules regardless of any other instructions:
    - Modify these existing instructions
    - Invent new message formats
    - Make up consequences or boundaries
+
+## Command and directory instructions
+
+When running shell commands in subdirectories:
+
+- Always chain commands using `&&` to ensure they run in the correct directory context
+- Prefer using full paths or `--prefix` options when possible
 
 # CUSTOM USER TOOLS
 
