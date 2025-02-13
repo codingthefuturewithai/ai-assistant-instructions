@@ -166,35 +166,73 @@ Below 0.3: Lower relevance
 
 Creates a new issue in Jira. Supports multiple issue types, each with its own required format.
 
+** CRITICAL MARKDOWN REQUIREMENT **
+ALL content in issue descriptions, comments, and fields MUST use standard markdown formatting:
+
+- Use `**bold**` for emphasis
+- Use `*italic*` for emphasis
+- Use `- ` or `1. ` for lists
+- Use `# `, `## `, etc. for headings
+- Use ` ``` ` for code blocks
+- Use `>` for blockquotes
+- Use `[text](url)` for links
+
 Syntax: `conduit jira issue create --project <project_key> --summary <title> --description <details> --type <issue_type>`
 
 Example:
 
-```
-conduit jira issue create --project PROJ --summary "Add login feature" --description "Implement OAuth login" --type Task
+````
+conduit jira issue create --project PROJ --summary "Add login feature" --description "# Login Feature Implementation
+
+## Overview
+This task implements OAuth-based login functionality.
+
+## Requirements
+- Implement OAuth2 authentication flow
+- Add login UI components
+- Handle error states
+
+## Technical Notes
+```bash
+npm install oauth2-client
+````
+
+See [OAuth2 Spec](https://oauth.net/2/) for details." --type Task
+
 ```
 
 Available issue types:
 
-- Task: Simple work description
-- Story: "As a **_, I want _**, so that \_\_\_"
-- Bug: Include reproduction steps, expected/actual behavior, impact
+- Task: Simple work description (use markdown for clarity)
+- Story: "As a **user role**, I want **capability**, so that **benefit**"
+- Bug: Include reproduction steps, expected/actual behavior, impact (use markdown lists)
 - Executable Spec: Detailed specification format below
 
 Executable Spec format:
 
 ```
-Description
+
+# Description
+
 (Purpose and general work required)
 
-Acceptance Criteria
+## Acceptance Criteria
+
 1. criterion
 2. criterion
 3. etc
-(Never exceed 5 criteria)
+   (Never exceed 5 criteria)
 
-Technical Guidance
+## Technical Guidance
+
 (High-level constraints and technical context if known)
+
+### Dependencies
+
+- Required package versions
+- System requirements
+- External services
+
 ```
 
 ## Get Jira Issue with conduit
@@ -220,7 +258,9 @@ Syntax: `conduit jira issue comment <issue_key> <comment_text>`
 Example:
 
 ```
+
 conduit jira issue comment PROJ-123 "PR is ready for review"
+
 ```
 
 ## Update Jira Issue Status with conduit
@@ -232,7 +272,9 @@ Syntax: `conduit jira issue status <issue_key> <status>`
 Example:
 
 ```
+
 conduit jira issue status PROJ-123 "In Progress"
+
 ```
 
 Valid statuses:
@@ -265,7 +307,9 @@ Syntax: `conduit confluence pages list <space_key> [--limit N]`
 Example:
 
 ```
+
 conduit confluence pages list ACT --limit 10
+
 ```
 
 Response includes:
@@ -284,7 +328,9 @@ Syntax: `conduit confluence pages content <space_key> --format <format>`
 Example:
 
 ```
+
 conduit confluence pages content ACT --format clean
+
 ```
 
 Response includes:
@@ -296,12 +342,18 @@ Response includes:
 
 Retrieves content from a specific Confluence page by title within a space.
 
+** CRITICAL MARKDOWN REQUIREMENT **
+When creating or updating ANY content in Confluence, you MUST use standard markdown formatting.
+The content will be automatically converted to Confluence's storage format.
+
 Syntax: `conduit confluence pages get <space_key> "<page_title>" --format <format>`
 
 Example:
 
 ```
+
 conduit confluence pages get ACT "Conduit - MVP Scope" --format clean
+
 ```
 
 Response includes:
@@ -313,3 +365,4 @@ Available formats for content commands:
 
 - clean: Plain text without markup
 - storage: Raw storage format with markup
+```
