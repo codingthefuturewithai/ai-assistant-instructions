@@ -82,6 +82,10 @@ These tools are available for users but must ONLY be executed when explicitly re
 - NEVER try different command variations
 - NEVER create fictional error messages or workflows
 
+** CRITICAL FORMAT REQUIREMENT **
+
+ALL content generated for Jira and Confluence MUST be in standard markdown format unless explicitly directed otherwise by the user.
+
 You SHOULD:
 
 - Execute these tools when explicitly asked by the user
