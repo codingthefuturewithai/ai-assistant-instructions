@@ -198,8 +198,6 @@ You MUST follow these steps in order and DO NOT combine them into a single comma
 conduit get-content-path
 ```
 
-STOP and note the exact path returned. You MUST use this exact path in step 2.
-
 2. Use your file editing capabilities to write the content in this structure to the file at the EXACT path returned in step 1:
 
 Sample content structure for an "Executable Spec" issue type (see supported issue types and their required content below):
@@ -220,7 +218,11 @@ Sample content structure for an "Executable Spec" issue type (see supported issu
 - [Technical detail 2]
 ```
 
-STOP and verify content was written before proceeding.
+STOP!! DO NOT GO TO STEP 3 YET! First prompt the user EXACTLY WITH:
+
+"This is the path conduit would like me to write the content to <content_path_from_step_1>. Do you approve?"
+
+If the user approves, then go to step 2.
 
 3. Execute the create command:
 
@@ -240,7 +242,7 @@ Syntax: `conduit jira issue create PROJ --summary <title> --content-file <path> 
 Available issue types:
 
 - Task: Simple work description
-- Story: "As a user role, I want capability, so that benefit". Must include Acceptance Criteria.
+- Story: "As a user role, I want capability, so that benefit". MUST include Acceptance Criteria, but DO NOT include Technical Guidance.
 - Bug: Include steps to reproduce, expected/actual behavior, and impact
 - Executable Spec: Must include Description, Acceptance Criteria, and Technical Guidance sections
 
