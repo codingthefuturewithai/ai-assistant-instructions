@@ -41,7 +41,7 @@ For more details about the configuration file format and other options, see the 
 2. Open Command Palette (Shift+Cmd+P)
 3. Select "Cursor Settings"
 4. Click on "General" in the left sidebar
-5. In the AI Rules section, paste the contents of `combined-assistant-custom-instructions.md`
+5. In the AI Rules section, paste the contents of [`combined-assistant-custom-instructions.md`](../universal/combined-assistant-custom-instructions.md)
 6. Click Save to apply the changes
 
 ![Cursor Configuration Example](../../images/cursor-settings-with-retriever-instructions.png)
@@ -51,7 +51,7 @@ For more details about the configuration file format and other options, see the 
 1. Open Windsurf IDE
 2. Click on "Windsurf - Settings" in the bottom navigation bar
 3. Navigate to "Set Global AI Rules" and click "Edit Rules"
-4. Paste the contents of `combined-assistant-custom-instructions.md`
+4. Paste the contents of [`combined-assistant-custom-instructions.md`](../universal/combined-assistant-custom-instructions.md)
 5. Save your changes
 
 ![Windsurf Configuration Example](../../images/windsurf-settings-with-retriever-instructions.png)

@@ -24,10 +24,9 @@ These instructions rely on tools from [Coding the Future with AI](https://github
    - Documentation access via Confluence
    - Link management
    - Issue tracking workflows
-   - Standardized templates
-   - Rich text processing
+   - Standardized issue formats
 
-   **Important Note for Aider Users**: When using conduit commands that create or update Jira issues with aider, you must launch aider with the `--no-git` option. This is required because conduit needs to write to files outside the code repository, which conflicts with aider's default git integration safety rules.
+   **Important Note for Aider Users**: When using conduit commands that create or update Jira issues with aider, you must launch aider with the `--no-git` option. This is required because the conduit issue create/update operations require aider to write to files outside the code repository, which conflicts with aider's default git integration safety rules.
 
 Please refer to each tool's repository for installation and configuration instructions.
 

@@ -4,12 +4,11 @@ This repository contains instruction sets and documentation that can be loaded i
 
 ## Getting Started
 
-To configure your AI coding assistant with these instructions:
+To configure your AI coding assistant with these instructions, follow our [Setup Guide](instructions/setup/ai-assistant-setup-guide.md) which provides step-by-step instructions for:
 
-1. Follow our [Setup Guide](instructions/setup/ai-assistant-setup-guide.md) which provides step-by-step instructions for:
-   - Installing prerequisites (RAG Retriever and Conduit tools)
-   - Configuring supported AI assistants (Aider, Cursor, and Windsurf)
-   - Verifying your setup is working correctly
+- Installing prerequisites (RAG Retriever and Conduit tools)
+- Configuring supported AI assistants (Aider, Cursor, and Windsurf)
+- Verifying your setup is working correctly
 
 ## Directory Structure
 
@@ -25,7 +24,6 @@ To configure your AI coding assistant with these instructions:
 │   │   ├── conduit-assistant-instructions.md
 │   │   ├── hallucination-prevention-instructions.md
 │   │   └── rag-retriever-assistant-instructions.md
-│   └── custom/             # Custom instruction sets
 ├── tests/
 │   └── assistant-custom-tools-tests.md
 ```
