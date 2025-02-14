@@ -62,10 +62,13 @@ These instructions enable AI assistants to work with the following tools:
    - Knowledge base management
 
 2. **Conduit**
+
    - Jira integration
    - Confluence integration
    - Issue tracking workflows
    - Standardized templates
+
+   **Note for Aider Users**: When using conduit commands that create or update Jira issues with aider, you must launch aider with the `--no-git` option. This is because conduit requires writing to files outside the code repository, which conflicts with aider's default git integration safety rules.
 
 ## Contributing
 

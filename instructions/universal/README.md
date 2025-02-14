@@ -19,12 +19,15 @@ These instructions rely on tools from [Coding the Future with AI](https://github
    - Confluence space indexing
 
 2. [Conduit](https://github.com/codingthefuturewithai/conduit)
+
    - Project management functions via Jira
    - Documentation access via Confluence
    - Link management
    - Issue tracking workflows
    - Standardized templates
    - Rich text processing
+
+   **Important Note for Aider Users**: When using conduit commands that create or update Jira issues with aider, you must launch aider with the `--no-git` option. This is required because conduit needs to write to files outside the code repository, which conflicts with aider's default git integration safety rules.
 
 Please refer to each tool's repository for installation and configuration instructions.
 
