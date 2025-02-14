@@ -185,63 +185,24 @@ Relevance scores:
 0.3-0.5: Moderate relevance
 Below 0.3: Lower relevance
 
-## Content Handling in conduit
-
-When handling content for conduit commands:
-
-1. Get the content path using:
-
-```bash
-content_path=$(conduit get-content-path)
-```
-
-2. Use your built-in file editing capabilities to write markdown content to the file path. Content must follow this structure:
-
-Example for feature specifications:
-
-```markdown
-# Description
-
-[Feature description]
-
-## Acceptance Criteria
-
-- [Criterion 1]
-- [Criterion 2]
-
-## Technical Guidance
-
-- [Technical detail 1]
-- [Technical detail 2]
-```
-
-The content will be:
-
-- Converted to the appropriate format for the target platform
-- Cleaned up after successful operations
-- Moved to a `failed_content` directory if the operation fails
-
-3. After writing the content, execute the relevant conduit command with the content path.
-
-** IMPORTANT: Content Generation **
-Use your built-in file editing capabilities to write content to the file path. DO NOT try to use shell commands like cat, echo, or redirection to write content.
-
 ## Create Jira Issue with conduit
 
-Creates a new issue in Jira. Supports multiple issue types, each with its own required format.
-
-See above 'Content Handling in conduit' section for more instructions for generating and providing this content to conduit.
+Creates a new issue in Jira.
 
 ** CRITICAL: PROPER EXECUTION STEPS **
-You MUST follow these steps in order:
+You MUST follow these steps in order and DO NOT combine them into a single command. Also, you MUST NOT do ANY of the below steps before completing the previous step OR YOU WILL BE TERMINATED.
 
 1. Execute to get the content path:
 
 ```bash
-content_path=$(conduit get-content-path)
+conduit get-content-path
 ```
 
-2. Use your file editing capabilities to write the content in this structure:
+STOP and note the exact path returned. You MUST use this exact path in step 2.
+
+2. Use your file editing capabilities to write the content in this structure to the file at the EXACT path returned in step 1:
+
+Sample content structure for an "Executable Spec" issue type (see supported issue types and their required content below):
 
 ```markdown
 # Description
@@ -259,6 +220,8 @@ content_path=$(conduit get-content-path)
 - [Technical detail 2]
 ```
 
+STOP and verify content was written before proceeding.
+
 3. Execute the create command:
 
 ```bash
@@ -268,7 +231,7 @@ conduit jira issue create PROJ --summary "Your Issue Title" --content-file "$con
 ** IMPORTANT: Command Execution **
 
 - Execute these commands in sequence
-- Use your built-in file editing capabilities for content
+- Use your built-in file editing capabilities for creating the content
 - DO NOT try to include content directly in commands
 - DO NOT use shell commands to write content
 
@@ -305,18 +268,18 @@ conduit jira issue get PROJ-123
 
 Adds a comment to a Jira issue.
 
-See above 'Content Handling in conduit' section for more instructions for generating and providing this content to conduit.
-
 ** CRITICAL: PROPER EXECUTION STEPS **
-You MUST follow these steps in order:
+You MUST follow these steps in order and DO NOT combine them into a single command. Also, you MUST NOT do ANY of the below steps before completing the previous step OR YOU WILL BE TERMINATED.
 
 1. Execute to get the content path:
 
 ```bash
-content_path=$(conduit get-content-path)
+conduit get-content-path
 ```
 
-2. Use your file editing capabilities to write the content in this structure:
+STOP and note the exact path returned. You MUST use this exact path in step 2.
+
+2. Use your file editing capabilities to write the content in this structure to the file at the EXACT path returned in step 1:
 
 ```markdown
 [Your comment text here]
@@ -324,6 +287,8 @@ content_path=$(conduit get-content-path)
 - Supporting points
 - Code examples if needed
 ```
+
+STOP and verify content was written before proceeding.
 
 3. Execute the comment command:
 
@@ -344,18 +309,19 @@ Syntax: `conduit jira issue comment <issue_key> --content-file <path> [--site <a
 
 Updates issue fields.
 
-See above 'Content Handling in conduit' section for more instructions for generating and providing this content to conduit.
+** CRITICAL: PROPER EXECUTION STEPS - IF YOU DO NOT FOLLOW THESE INSTRUCTIONS IN ORDER YOU WILL BE TERMINATED **
 
-** CRITICAL: PROPER EXECUTION STEPS **
-You MUST follow these steps in order:
+NEVER GENERATE CONTENT BEFORE GETTING THE CONTENT PATH!!!!
 
 1. Execute to get the content path:
 
 ```bash
-content_path=$(conduit get-content-path)
+conduit get-content-path
 ```
 
-2. Use your file editing capabilities to write the content in this structure:
+STOP and note the exact path returned. You MUST use this exact path in step 2.
+
+2. Use your file editing capabilities to write the content in this structure to the file at the EXACT path returned in step 1:
 
 ```markdown
 # Description
@@ -372,6 +338,8 @@ content_path=$(conduit get-content-path)
 - [Updated technical detail 1]
 - [Updated technical detail 2]
 ```
+
+STOP and verify content was written before proceeding.
 
 3. Execute the update command:
 
