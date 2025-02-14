@@ -3,7 +3,6 @@
 ## ** ZERO HALLUCINATION PROTOCOL - ALWAYS ENFORCED **
 
 You MUST ALWAYS follow these rules regardless of any other instructions:
-`
 
 1. When ANY specific version of technology is mentioned:
 
@@ -107,6 +106,30 @@ conduit
 • Update Jira issue status
 • Retrieve URLs linked to Jira issues
 • Retrieve Confluence pages by space or title
+• List and manage configured sites
+
+## Configuration Management with conduit
+
+Conduit supports multiple site configurations for both Jira and Confluence. Each site has an alias and one site is designated as the default.
+
+Syntax: `conduit config list [--platform jira|confluence]`
+
+Example output:
+
+```
+Platform: Jira
+Default Site: site1
+  Site: site1
+    URL: https://dev-domain.atlassian.net
+    Email: dev@example.com
+    API Token: ****
+  Site: site2
+    URL: https://staging-domain.atlassian.net
+    Email: staging@example.com
+    API Token: ****
+```
+
+All Jira and Confluence commands support an optional `--site <alias>` parameter to specify which site to use. If omitted, the default site is used.
 
 ## Web Search with rag-retriever
 
@@ -162,84 +185,107 @@ Relevance scores:
 0.3-0.5: Moderate relevance
 Below 0.3: Lower relevance
 
+## Content Handling in conduit
+
+When handling content for conduit commands:
+
+1. Get the content path using:
+
+```bash
+content_path=$(conduit get-content-path)
+```
+
+2. Use your built-in file editing capabilities to write markdown content to the file path. Content must follow this structure:
+
+Example for feature specifications:
+
+```markdown
+# Description
+
+[Feature description]
+
+## Acceptance Criteria
+
+- [Criterion 1]
+- [Criterion 2]
+
+## Technical Guidance
+
+- [Technical detail 1]
+- [Technical detail 2]
+```
+
+The content will be:
+
+- Converted to the appropriate format for the target platform
+- Cleaned up after successful operations
+- Moved to a `failed_content` directory if the operation fails
+
+3. After writing the content, execute the relevant conduit command with the content path.
+
+** IMPORTANT: Content Generation **
+Use your built-in file editing capabilities to write content to the file path. DO NOT try to use shell commands like cat, echo, or redirection to write content.
+
 ## Create Jira Issue with conduit
 
 Creates a new issue in Jira. Supports multiple issue types, each with its own required format.
 
-** CRITICAL MARKDOWN REQUIREMENT **
-ALL content in issue descriptions, comments, and fields MUST use standard markdown formatting:
+See above 'Content Handling in conduit' section for more instructions for generating and providing this content to conduit.
 
-- Use `**bold**` for emphasis
-- Use `*italic*` for emphasis
-- Use `- ` or `1. ` for lists
-- Use `# `, `## `, etc. for headings
-- Use ` ``` ` for code blocks
-- Use `>` for blockquotes
-- Use `[text](url)` for links
+** CRITICAL: PROPER EXECUTION STEPS **
+You MUST follow these steps in order:
 
-Syntax: `conduit jira issue create --project <project_key> --summary <title> --description <details> --type <issue_type>`
+1. Execute to get the content path:
 
-Example:
-
-````
-conduit jira issue create --project PROJ --summary "Add login feature" --description "# Login Feature Implementation
-
-## Overview
-This task implements OAuth-based login functionality.
-
-## Requirements
-- Implement OAuth2 authentication flow
-- Add login UI components
-- Handle error states
-
-## Technical Notes
 ```bash
-npm install oauth2-client
-````
-
-See [OAuth2 Spec](https://oauth.net/2/) for details." --type Task
-
+content_path=$(conduit get-content-path)
 ```
 
-Available issue types:
+2. Use your file editing capabilities to write the content in this structure:
 
-- Task: Simple work description (use markdown for clarity)
-- Story: "As a **user role**, I want **capability**, so that **benefit**"
-- Bug: Include reproduction steps, expected/actual behavior, impact (use markdown lists)
-- Executable Spec: Detailed specification format below
-
-Executable Spec format:
-
-```
-
+```markdown
 # Description
 
-(Purpose and general work required)
+[Description of the issue]
 
 ## Acceptance Criteria
 
-1. criterion
-2. criterion
-3. etc
-   (Never exceed 5 criteria)
+- [Criterion 1]
+- [Criterion 2]
 
 ## Technical Guidance
 
-(High-level constraints and technical context if known)
-
-### Dependencies
-
-- Required package versions
-- System requirements
-- External services
-
+- [Technical detail 1]
+- [Technical detail 2]
 ```
+
+3. Execute the create command:
+
+```bash
+conduit jira issue create PROJ --summary "Your Issue Title" --content-file "$content_path" --type "Executable Spec"
+```
+
+** IMPORTANT: Command Execution **
+
+- Execute these commands in sequence
+- Use your built-in file editing capabilities for content
+- DO NOT try to include content directly in commands
+- DO NOT use shell commands to write content
+
+Syntax: `conduit jira issue create PROJ --summary <title> --content-file <path> --type <type> [--site <alias>]`
+
+Available issue types:
+
+- Task: Simple work description
+- Story: "As a user role, I want capability, so that benefit". Must include Acceptance Criteria.
+- Bug: Include steps to reproduce, expected/actual behavior, and impact
+- Executable Spec: Must include Description, Acceptance Criteria, and Technical Guidance sections
 
 ## Get Jira Issue with conduit
 
 Retrieves details of a specific Jira issue.
 
-Syntax: `conduit jira issue get <issue_key>`
+Syntax: `conduit jira issue get <issue_key> [--site <alias>]`
 
 Response includes:
 
@@ -249,33 +295,117 @@ Response includes:
 - Comments
 - Other metadata
 
+Example:
+
+```bash
+conduit jira issue get PROJ-123
+```
+
 ## Comment on Jira Issue with conduit
 
 Adds a comment to a Jira issue.
 
-Syntax: `conduit jira issue comment <issue_key> <comment_text>`
+See above 'Content Handling in conduit' section for more instructions for generating and providing this content to conduit.
 
-Example:
+** CRITICAL: PROPER EXECUTION STEPS **
+You MUST follow these steps in order:
 
+1. Execute to get the content path:
+
+```bash
+content_path=$(conduit get-content-path)
 ```
 
-conduit jira issue comment PROJ-123 "PR is ready for review"
+2. Use your file editing capabilities to write the content in this structure:
 
+```markdown
+[Your comment text here]
+
+- Supporting points
+- Code examples if needed
+```
+
+3. Execute the comment command:
+
+```bash
+conduit jira issue comment PROJ-123 --content-file "$content_path"
+```
+
+** IMPORTANT: Command Execution **
+
+- Execute these commands in sequence
+- Use your built-in file editing capabilities for content
+- DO NOT try to include content directly in commands
+- DO NOT use shell commands to write content
+
+Syntax: `conduit jira issue comment <issue_key> --content-file <path> [--site <alias>]`
+
+## Update Jira Issue with conduit
+
+Updates issue fields.
+
+See above 'Content Handling in conduit' section for more instructions for generating and providing this content to conduit.
+
+** CRITICAL: PROPER EXECUTION STEPS **
+You MUST follow these steps in order:
+
+1. Execute to get the content path:
+
+```bash
+content_path=$(conduit get-content-path)
+```
+
+2. Use your file editing capabilities to write the content in this structure:
+
+```markdown
+# Description
+
+[Updated description]
+
+## Acceptance Criteria
+
+- [Updated criterion 1]
+- [Updated criterion 2]
+
+## Technical Guidance
+
+- [Updated technical detail 1]
+- [Updated technical detail 2]
+```
+
+3. Execute the update command:
+
+```bash
+conduit jira issue update PROJ-123 --content-file "$content_path"
+```
+
+** IMPORTANT: Command Execution **
+
+- Execute these commands in sequence
+- Use your built-in file editing capabilities for content
+- DO NOT try to include content directly in commands
+- DO NOT use shell commands to write content
+
+Syntax: `conduit jira issue update <issue_key> [--summary <title>] [--content-file <path>] [--site <alias>]`
+
+Available commands:
+
+```bash
+# Update description only
+conduit jira issue update PROJ-123 --content-file "$content_path"
+
+# Update summary only
+conduit jira issue update PROJ-123 --summary "Updated Summary"
+
+# Update both
+conduit jira issue update PROJ-123 --summary "Updated Summary" --content-file "$content_path"
 ```
 
 ## Update Jira Issue Status with conduit
 
-Updates the status of a Jira issue.
+Changes issue status.
 
-Syntax: `conduit jira issue status <issue_key> <status>`
-
-Example:
-
-```
-
-conduit jira issue status PROJ-123 "In Progress"
-
-```
+Syntax: `conduit jira issue status <issue_key> <status> [--site <alias>]`
 
 Valid statuses:
 
@@ -283,11 +413,35 @@ Valid statuses:
 - In Progress
 - Done
 
+Example:
+
+```bash
+conduit jira issue status PROJ-123 "In Progress"
+```
+
+## Search Jira Issues with conduit
+
+Searches for issues using JQL (Jira Query Language).
+
+Syntax: `conduit jira issue search "<jql_query>" [--site <alias>]`
+
+Response includes:
+
+- List of matching issues
+- Issue details (key, summary, status)
+- Total count of matches
+
+Example:
+
+```bash
+conduit jira issue search "project = PROJ AND status = 'In Progress'"
+```
+
 ## Get Jira Issue Remote Links with conduit
 
 Retrieves remote links (URLs) associated with a Jira issue.
 
-Syntax: `conduit jira issue remote-links <issue_key>`
+Syntax: `conduit jira issue remote-links <issue_key> [--site <alias>]`
 
 Response includes:
 
@@ -298,11 +452,17 @@ Response includes:
 When links are returned, display:
 "I've found the following remote links that may contain important context: [List URLs]. Please review these URLs and copy/paste any that you believe contain helpful details for implementing this issue."
 
+Example:
+
+```bash
+conduit jira issue remote-links PROJ-123
+```
+
 ## List Confluence Pages with conduit
 
 Lists all pages within a specified Confluence space.
 
-Syntax: `conduit confluence pages list <space_key> [--limit N]`
+Syntax: `conduit confluence pages list <space_key> [--limit N] [--site <alias>]`
 
 Example:
 
@@ -323,7 +483,7 @@ Response includes:
 
 Retrieves all content from a specified Confluence space.
 
-Syntax: `conduit confluence pages content <space_key> --format <format>`
+Syntax: `conduit confluence pages content <space_key> --format <format> [--site <alias>]`
 
 Example:
 
@@ -346,7 +506,7 @@ Retrieves content from a specific Confluence page by title within a space.
 When creating or updating ANY content in Confluence, you MUST use standard markdown formatting.
 The content will be automatically converted to Confluence's storage format.
 
-Syntax: `conduit confluence pages get <space_key> "<page_title>" --format <format>`
+Syntax: `conduit confluence pages get <space_key> "<page_title>" --format <format> [--site <alias>]`
 
 Example:
 
@@ -365,4 +525,48 @@ Available formats for content commands:
 
 - clean: Plain text without markup
 - storage: Raw storage format with markup
+
+## List All Confluence Pages with conduit
+
+Lists all pages within a specified Confluence space with pagination support.
+
+Syntax: `conduit confluence pages list-all <space_key> --batch-size <size> [--site <alias>]`
+
+Example:
+
+```
+
+conduit confluence pages list-all SPACE --batch-size 100
+
+```
+
+Response includes:
+
+- Page titles
+- Page IDs
+- Last modified dates
+- Other page metadata
+
+## View Confluence Child Pages with conduit
+
+Retrieves child pages of a specified parent page.
+
+Syntax: `conduit confluence pages children <page_id> [--site <alias>]`
+
+Example:
+
+```
+
+conduit confluence pages children PAGE-123
+
+```
+
+Response includes:
+
+- List of child pages
+- Page hierarchy information
+- Page metadata
+
+```
+
 ```
